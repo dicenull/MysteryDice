@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.XR.PXR;
 using UnityEngine;
 
 public class ButtonToggle : MonoBehaviour
@@ -33,5 +34,14 @@ public class ButtonToggle : MonoBehaviour
 		var prevState = animator.GetBool(buttonAnimateName);
 
 		animator.SetBool(buttonAnimateName, !prevState);
+
+		if(other.name.Contains("PICO 4 L"))
+		{
+			PXR_Input.SetControllerVibrationEvent(0, 100, 1f, 5);
+		}
+		if(other.name.Contains("PICO 4 R"))
+		{
+			PXR_Input.SetControllerVibrationEvent(1, 100, 1f, 5);	
+		}
 	}
 }
