@@ -4,6 +4,7 @@ using UniRx.Triggers;
 using UniRx;
 using Unity.XR.PXR;
 using UnityEngine;
+using System.Linq;
 
 public class HeadRayController : MonoBehaviour
 {
@@ -23,8 +24,7 @@ public class HeadRayController : MonoBehaviour
             checkRayTrack();
         });
 
-        flag.ObserveEveryValueChanged(x => x)
-            .Subscribe(_ =>
+        flag.Subscribe(_ =>
         {
             GetComponent<Renderer>().material = flag.Value ? activeMaterial : inactiveMaterial;
         });
@@ -38,6 +38,7 @@ public class HeadRayController : MonoBehaviour
         {
             PXR_Input.SetControllerVibrationEvent(0, 500, 1f, 3);
             PXR_Input.SetControllerVibrationEvent(1, 500, 1f, 3);
+            Debug.Log($"Count {countTime}");
         }
     }
 
