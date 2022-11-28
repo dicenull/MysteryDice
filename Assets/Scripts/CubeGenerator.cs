@@ -6,11 +6,19 @@ using UnityEngine.InputSystem;
 public class CubeGenerator : MonoBehaviour
 {
     [SerializeField] GameObject bullet;
+    [SerializeField] float speed;
+
+    [SerializeField] Transform controller;
 
     public void OnGenerate(InputAction.CallbackContext context)
     {
-        var bulletObj = Instantiate(bullet, transform.position, transform.rotation);
-        bulletObj.GetComponent<Rigidbody>().AddForce((transform.forward + transform.right) * 0.1f, ForceMode.VelocityChange);
+        if (!context.performed) return;
+
+        var pos = controller.position;
+        var rot = controller.rotation;
+
+        var bulletObj = Instantiate(bullet, pos, rot);
+        bulletObj.GetComponent<Rigidbody>().AddForce((controller.forward) * speed, ForceMode.VelocityChange);
 
         Destroy(bulletObj, 5f);
     }
