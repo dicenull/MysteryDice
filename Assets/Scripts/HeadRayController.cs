@@ -11,22 +11,25 @@ public class HeadRayController : MonoBehaviour
     const int thredhold = 3;
     float countTime = 0;
 
-    BoolReactiveProperty flag = new BoolReactiveProperty();
-
     [SerializeField] Material inactiveMaterial;
     [SerializeField] Material activeMaterial;
 
+    GameManager manager;
+
     private void Start()
     {
-        this.UpdateAsObservable().Where(_ => !flag.Value).Subscribe(_ =>
+        manager = GameObject.FindWithTag("GameController").GetComponent<GameManager>();
+        var resolved = manager.mysteryOneResolved.Value;
+
+        this.UpdateAsObservable().Where(_ => !resolved).Subscribe(_ =>
         {
             feedBack();
             checkRayTrack();
         });
 
-        flag.Subscribe(_ =>
+        manager.mysteryOneResolved.Subscribe(resolved =>
         {
-            GetComponent<Renderer>().material = flag.Value ? activeMaterial : inactiveMaterial;
+            GetComponent<Renderer>().material = resolved ? activeMaterial : inactiveMaterial;
         });
     }
 
@@ -66,7 +69,7 @@ public class HeadRayController : MonoBehaviour
 
         if (countTime > thredhold)
         {
-            flag.Value = true;
+            manager.mysteryOneResolved.Value = true;
         }
     }
 }
