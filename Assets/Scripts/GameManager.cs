@@ -9,4 +9,5 @@ public class GameManager : MonoBehaviour
     public const int misteryCount = 6;
 
     public ReactiveProperty<bool> mysteryOneResolved = new ReactiveProperty<bool>(false);
+    public ReactiveProperty<bool> mysteryTwoResolved = new ReactiveProperty<bool>(false);
 }
