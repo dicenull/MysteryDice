@@ -16,12 +16,13 @@ public class CubeGenerator : MonoBehaviour
     {
         if (!context.performed) return;
 
-
-        var pos = controller.position;
+        var localPos = controller.localPosition;
         var rot = controller.rotation;
+        var pos = controller.position;
 
         // さいころの中でしか発射できない
-        var maxDistance = new List<float> { Math.Abs(pos.x), Math.Abs(pos.y), Math.Abs(pos.z) }.Max();
+        var maxDistance = new List<float> { Math.Abs(localPos.x), Math.Abs(localPos.y), Math.Abs(localPos.z) }.Max();
+        Debug.Log(maxDistance);
         if (maxDistance > 2) return;
 
         var bulletObj = Instantiate(bullet, pos, rot);

@@ -7,7 +7,7 @@ using UnityEngine;
 public class ButtonToggle : MonoBehaviour
 {
     Animator animator;
-    const String buttonAnimateName = "Enable";
+    const string buttonAnimateName = "Enable";
 
     // Start is called before the first frame update
     void Start()
@@ -17,7 +17,7 @@ public class ButtonToggle : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
         {
             animator.SetBool(buttonAnimateName, true);
         }
@@ -35,13 +35,13 @@ public class ButtonToggle : MonoBehaviour
 
         animator.SetBool(buttonAnimateName, !prevState);
 
-        if(other.name.Contains("PICO 4 L"))
+        if (other.name.Contains("PICO 4 L"))
         {
             PXR_Input.SetControllerVibrationEvent(0, 100, 1f, 5);
         }
-        if(other.name.Contains("PICO 4 R"))
+        if (other.name.Contains("PICO 4 R"))
         {
-            PXR_Input.SetControllerVibrationEvent(1, 100, 1f, 5);	
+            PXR_Input.SetControllerVibrationEvent(1, 100, 1f, 5);
         }
     }
 }
